@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plasmatic Todo</title>
+  
+  <!--Local Stylesheet--> 
+  <link rel="stylesheet" href="/style/base.css" />
+  
+  <!--Local js Script-->
+   <script src="/script/main.js" type="module"></script>
+   
+  <!--Fomt awesome icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  
+  <!--on smaller mobile screensizes,bring it more above--> 
+  <main class="todo-app">
+    <h1 class="app-title">Plasmatic To-Do</h1>
+
+    <div class="task-input-area">
+      <input 
+        type="text" 
+        id="taskInput" 
+        placeholder="Type your task..." 
+        class="task-input" 
+      />
+      <button id="addTaskBtn" class="add-btn">＋</button>
+      <button id="cancelBtn" class="cancel-btn">✕</button>
+    </div>
+
+    <section id="taskContainer" class="task-container">
+      <!-- dynamically added tasks appear here -->
+    </section>
+  </main>
+
+</body>
+</html>
