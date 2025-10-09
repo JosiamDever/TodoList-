@@ -238,6 +238,7 @@ body{
             drop-shadow(0 0 10px rgba(0, 255, 255, 0.7));
   }
 }
+
 .taskDone .removeTaskBtn{
   animation: neonPulse 0.6s ease;
   animation-iteration-count: infinite;
