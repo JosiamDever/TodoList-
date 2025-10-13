@@ -1,0 +1,89 @@
+.sideBarSurprise{
+  margin-top: 4rem;
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem,1rem,2rem); 
+ /* background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);*/ 
+  color: #686474;
+  text-align: center;
+
+  width: 100vw;
+  max-width: 100vw;
+}
+
+.sideBarSurprise h3{
+  color: #ffcb6b;
+  font-size: clamp(1.1rem,1.2rem,2rem);
+}
+
+.quoteContent{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: clamp(1.1rem,1rem,2rem);
+}
+
+.quoteContent .quoteText{
+  line-height: clamp(40px,1.1rem,80px);
+  color: #e0e0e0;
+  
+}
+
+.quoteContent .quoteAuthor{
+  font-style: italic;
+  text-transform: capitalize;
+  font-size: clamp(0.6rem,0.7rem,1.3rem);
+  color: #a0a0a0;
+}
+
+.sidebarButtons{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: clamp(30px,1rem,2rem)
+}
+
+.sidebarButtons button{
+  margin-top: 1rem;
+  font-size: clamp(0.8rem,0.8rem,1.5rem);
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 1rem;
+  color: whitesmoke;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebarButtons button:active{
+  transform: scale(0.9) translateY(2px);
+}
+
+.sidebarButtons .shareBtn{
+  background: #00adb5;
+}
+
+@keyframes slideFade{
+  0%{
+    right: -100%;
+    opacity: 0;
+  }
+  100%{
+    right: 0;
+    opacity: 100;
+  }
+}
+
+/*animation sideBar*/
+.skideToLeft{
+  animation: slideFade 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+/*increase the index of the confetti canvas*/ 
+.confettiCanvas{
+  position: fixed;
+  z-index: 200 !important;
+  pointer-events: none;
+}

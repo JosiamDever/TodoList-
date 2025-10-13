@@ -37,13 +37,16 @@ function fireConfetti(){
   
 };
 
+
 //confetti sound effect by sound lb
 const confettiSound = new Howl({
   
   src: ['/style/sounds/partyhorn.mp3'],
   volume: 0.6
   
-}); 
+});
+
+const sideBarCongrats = document.querySelector('.sideBarSurprise')
 
 //update progress bar by checking
 function moreOne(spot){
@@ -56,8 +59,24 @@ function moreOne(spot){
       bar.style.width = currentLenght + '%';
       
       if(currentLenght >= 100){
+        
         fireConfetti(); 
-        confettiSound.play(); 
+        confettiSound.play();
+        
+        //handling canvas document raised element(CDN lb)
+        const confettiCanvas = document.querySelector('canvas');
+
+        confettiCanvas.classList.add('confettiCanvas')
+        
+        //sidebar animation slid
+        sideBarCongrats.style.display = 'flex';
+        
+        sideBarCongrats.classList.add('skideToLeft');
+        
+        sideBarCongrats.addEventListener('animationend', () => {
+          
+        }); 
+        
       }; 
       
       return; 

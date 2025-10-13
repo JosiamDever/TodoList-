@@ -1,4 +1,6 @@
-/*const apiKey = 'PRmJBgugNyEQvxv2qpOxwQ==sacpzTcVI958h3C1' 
+const quoteText = document.querySelector('.quoteText')
+
+const apiKey = 'PRmJBgugNyEQvxv2qpOxwQ==sacpzTcVI958h3C1' 
 
 fetch('https://api.api-ninjas.com/v1/quotes', {
   
@@ -17,11 +19,12 @@ fetch('https://api.api-ninjas.com/v1/quotes', {
   })
   
   .then(data => { 
-    const quote = data[0].quote
-    console.log(quote) 
+    const quote = data[0].quote;
+    
+    
   })
   
   .catch(error => {
     console.error(error); 
   }); 
-*/ 
+
