@@ -41,9 +41,10 @@ body{
   color: #e0e0e0;
 
   display: flex;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   min-width: 100vw;
 
   margin: 0;
@@ -149,8 +150,8 @@ body{
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
-  width: clamp(0.8rem,0.9rem,1.4rem);
-  height: clamp(0.8rem,0.9rem,1.4rem);
+  width: clamp(1rem,1.2rem,1.7rem);
+  height: clamp(1rem,1.2rem,1.7rem);
   border-radius: 50%;
   border: 1px solid lightgrey;
   background: transparent;
@@ -243,4 +244,23 @@ body{
   animation: neonPulse 0.6s ease;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+/*progressbar style*/ 
+.progressBarConteiner{
+  display: none;
+  width: 100%;
+  max-width: 430px;
+  height: clamp(1rem,1rem,2rem);
+  background: #5D6080;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.progressBar{
+  width: 0%;
+  height: 100%;
+  background: #09E40C;
+  transition: all 0.3s ease;
 }
