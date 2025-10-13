@@ -3,6 +3,137 @@ const addTaskBtn = document.getElementById('addTaskBtn');
 const cancelBtn = document.getElementById('cancelBtn');
 const taskContainer = document.getElementById('taskContainer');
 
+//progressBar variables
+let currentLenght = 0 
+
+let tasksAmount = document.querySelector('.task-container').childElementCount;
+
+let percentageIncrease = 0; 
+
+let finishedTask = 0; 
+
+const parentBar = document.querySelector('.progressBarConteiner')
+
+const bar = document.querySelector('.progressBar');
+
+//confetti animation 
+function fireConfetti(){
+  
+  confetti({
+    
+    //number of pieces of confetti
+    particleCount: 100,
+    
+    //gap default amount 
+    spread: 70,
+    
+    //vertically
+    origin: {y: 0.6},
+    
+    //color mix palette
+    colors: ['#00ffff', '#9b5de5', '#6565D7']
+    
+  }); 
+  
+};
+
+//confetti sound effect by sound lb
+const confettiSound = new Howl({
+  
+  src: ['/style/sounds/partyhorn.mp3'],
+  volume: 0.6
+  
+}); 
+
+//update progress bar by checking
+function moreOne(spot){
+  if(spot){
+    
+    if(spot.checked && currentLenght < 100){
+      
+      currentLenght += percentageIncrease;
+      
+      bar.style.width = currentLenght + '%';
+      
+      if(currentLenght >= 100){
+        fireConfetti(); 
+        confettiSound.play(); 
+      }; 
+      
+      return; 
+      
+    } else if (!spot.checked && currentLenght > 0) {
+      
+      currentLenght -= percentageIncrease;
+      
+      bar.style.width = currentLenght + '%';
+      
+      return; 
+      
+    }
+    
+  };
+  
+}; 
+
+//spot new tasks(resset the tasks calcute to control the envolviment of the progressbar)
+const taskEnter = new MutationObserver(events => {
+  
+  events.forEach(event => {
+    
+    currentLenght = 0; 
+    
+    finishedTask = 0;
+    
+    tasksAmount = 0; 
+    
+    if(taskContainer.childElementCount > 0){
+      
+      parentBar.style.display = "inherit"; 
+      
+    }else{
+      
+      parentBar.style.display = 'none';
+      
+    }
+    
+    //update tasks amount and finished ones 
+    let children = taskContainer.querySelectorAll(':scope > div')
+    
+      children.forEach(div => {
+        
+        const checkBox = div.querySelector('input[type="checkbox"]')
+        
+        if(checkBox.checked){
+          
+          finishedTask += 1;
+          
+        }
+        
+        tasksAmount += 1; 
+      
+      })
+    
+    //update progress variables
+    bar.style.width = 0 + '%';
+    
+    percentageIncrease = parseFloat((100 / tasksAmount).toFixed(3));
+    
+    for(let x = finishedTask;x != 0;x--){
+      
+      currentLenght += percentageIncrease; 
+      
+      bar.style.width = currentLenght + '%';
+      
+    }; 
+    
+  });
+  
+})
+
+//update progressbar
+taskEnter.observe(taskContainer, {childList: true});
+
 //behavioral function of cancel task btn
 function toggleCancel(){
   
@@ -30,9 +161,11 @@ addTaskBtn.addEventListener('click', () => {
   checkInput.type = 'checkbox';
   
   //switch the class which display the task as finished
-  checkInput.addEventListener('change', () => {
+  checkInput.addEventListener('change', (ee) => {
     
-    taskCard.classList.toggle('taskDone'); 
+    taskCard.classList.toggle('taskDone');
+    
+    moreOne(ee.target); 
     
   }); 
   
@@ -78,8 +211,6 @@ addTaskBtn.addEventListener('click', () => {
     
     taskCard.classList.remove('fadeIn');
     
-    console.log(taskCard.classList.contains('fadeIn')); 
-    
   }, {once: true});
   
 });
@@ -104,4 +235,4 @@ taskInput.addEventListener('input', () => {
     
   };
   
-}); 
+});
