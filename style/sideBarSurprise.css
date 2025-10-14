@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   gap: clamp(1rem,1rem,2rem); 
+  padding: 1rem 1rem;
  /* background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);*/ 
   color: #686474;
   text-align: center;
@@ -19,6 +20,7 @@
 }
 
 .quoteContent{
+  margin-top: 1rem;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -26,8 +28,9 @@
 }
 
 .quoteContent .quoteText{
-  line-height: clamp(40px,1.1rem,80px);
+  line-height: clamp(30px,0.6rem,80px);
   color: #e0e0e0;
+  font-size: clamp(0.6rem,0.7rem,1rem);
   
 }
 

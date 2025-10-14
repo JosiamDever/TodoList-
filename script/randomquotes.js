@@ -1,6 +1,14 @@
 const quoteText = document.querySelector('.quoteText')
 
-const apiKey = 'PRmJBgugNyEQvxv2qpOxwQ==sacpzTcVI958h3C1' 
+const autorName = document.querySelector('.quoteAuthor')
+
+const apiKey = 'PRmJBgugNyEQvxv2qpOxwQ==sacpzTcVI958h3C1'
+
+function requestQuote(){
+  
+  const characLimit = 200; 
+  
+}
 
 fetch('https://api.api-ninjas.com/v1/quotes', {
   
@@ -19,8 +27,15 @@ fetch('https://api.api-ninjas.com/v1/quotes', {
   })
   
   .then(data => { 
-    const quote = data[0].quote;
     
+    const fullQuote = data[0];
+    
+    console.log(fullQuote)
+    
+    //assigning object data
+    quoteText.innerText = `"${fullQuote.quote}"`;
+    
+    autorName.innerText = fullQuote.author; 
     
   })
   
