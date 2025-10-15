@@ -4,7 +4,7 @@ const cancelBtn = document.getElementById('cancelBtn');
 const taskContainer = document.getElementById('taskContainer');
 
 //progressBar variables
-let currentLenght = 0 
+let currentLenght = 0; 
 
 let tasksAmount = document.querySelector('.task-container').childElementCount;
 
@@ -46,11 +46,15 @@ const confettiSound = new Howl({
   
 });
 
-const sideBarCongrats = document.querySelector('.sideBarSurprise')
+export const sideBarCongrats = document.querySelector('.sideBarSurprise')
+
+import {requestQuote} from '/script/randomquotes.js'; 
 
 //update progress bar by checking
 function moreOne(spot){
   if(spot){
+    
+    console.log(currentLenght); 
     
     if(spot.checked && currentLenght < 100){
       
@@ -63,19 +67,7 @@ function moreOne(spot){
         fireConfetti(); 
         confettiSound.play();
         
-        //handling canvas document raised element(CDN lb)
-        const confettiCanvas = document.querySelector('canvas');
-
-        confettiCanvas.classList.add('confettiCanvas')
-        
-        //sidebar animation slid
-        sideBarCongrats.style.display = 'flex';
-        
-        sideBarCongrats.classList.add('skideToLeft');
-        
-        sideBarCongrats.addEventListener('animationend', () => {
-          
-        }); 
+        requestQuote(); 
         
       }; 
       
@@ -100,8 +92,6 @@ const taskEnter = new MutationObserver(events => {
   
   events.forEach(event => {
     
-    currentLenght = 0; 
-    
     finishedTask = 0;
     
     tasksAmount = 0; 
@@ -119,17 +109,20 @@ const taskEnter = new MutationObserver(events => {
     //update tasks amount and finished ones 
     let children = taskContainer.querySelectorAll(':scope > div')
     
+    //node lists hasn't the method childElementCount,its just available to single DOM elements(not a set of them); 
+    currentLenght = 0; 
+    
       children.forEach(div => {
         
         const checkBox = div.querySelector('input[type="checkbox"]')
         
-        if(checkBox.checked){
+        if(checkBox && checkBox.checked){
           
-          finishedTask += 1;
+          finishedTask++;
           
-        }
+        }; 
         
-        tasksAmount += 1; 
+        tasksAmount++; 
       
       })
     
@@ -138,7 +131,10 @@ const taskEnter = new MutationObserver(events => {
     
     percentageIncrease = parseFloat((100 / tasksAmount).toFixed(3));
     
+    //try change its logic to some flag apart 
     for(let x = finishedTask;x != 0;x--){
+      
+      //this loop never gets fired when the first task wasn't created being marked
       
       currentLenght += percentageIncrease; 
       
