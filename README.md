@@ -1,4 +1,4 @@
-![Project Logo](./assets/logo.png)  
+![Project Logo](https://github.com/JosiamDever/ImagesRepo/blob/82e1a54148fccba5c2258e303fb259290ea4349c/PlasmaticTodoLogo.webp)  
 <!-- Replace ./assets/logo.png with your project logo or cover image -->
 
 # Todo List — Plasmatic (Midnight Flow)
