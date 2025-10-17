@@ -54,8 +54,6 @@ import {requestQuote} from '/script/randomquotes.js';
 function moreOne(spot){
   if(spot){
     
-    console.log(currentLenght)
-    
     if(spot.checked && currentLenght <= 100){
       
       if(currentLenght === 99.99){
@@ -75,8 +73,6 @@ function moreOne(spot){
       bar.style.width = currentLenght + '%';*/ 
       
       if(currentLenght === 100  || currentLenght === 99.99){
-        
-        console.log(`current lenght has reached ${currentLenght}%`); 
         
         fireConfetti(); 
         confettiSound.play();
