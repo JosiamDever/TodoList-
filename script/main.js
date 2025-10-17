@@ -48,21 +48,35 @@ const confettiSound = new Howl({
 
 export const sideBarCongrats = document.querySelector('.sideBarSurprise')
 
-import {requestQuote} from '/script/randomquotes.js'; 
+import {requestQuote} from '/script/randomquotes.js';
 
 //update progress bar by checking
 function moreOne(spot){
   if(spot){
     
-    console.log(currentLenght); 
+    console.log(currentLenght)
     
-    if(spot.checked && currentLenght < 100){
+    if(spot.checked && currentLenght <= 100){
       
-      currentLenght += percentageIncrease;
+      if(currentLenght === 99.99){
+        currentLenght = 100; 
+      }; 
       
-      bar.style.width = currentLenght + '%';
+      if(currentLenght < 100){
+        
+        
+        currentLenght += percentageIncrease;
       
-      if(currentLenght >= 100){
+        bar.style.width = currentLenght + '%';
+        
+      }
+     /* currentLenght += percentageIncrease;
+      
+      bar.style.width = currentLenght + '%';*/ 
+      
+      if(currentLenght === 100  || currentLenght === 99.99){
+        
+        console.log(`current lenght has reached ${currentLenght}%`); 
         
         fireConfetti(); 
         confettiSound.play();
@@ -85,7 +99,8 @@ function moreOne(spot){
     
   };
   
-}; 
+};
+
 
 //spot new tasks(resset the tasks calcute to control the envolviment of the progressbar)
 const taskEnter = new MutationObserver(events => {
@@ -94,7 +109,10 @@ const taskEnter = new MutationObserver(events => {
     
     finishedTask = 0;
     
-    tasksAmount = 0; 
+    tasksAmount = 0;
+    
+    //update progress variables
+    bar.style.width = 0 + '%';
     
     if(taskContainer.childElementCount > 0){
       
@@ -107,10 +125,15 @@ const taskEnter = new MutationObserver(events => {
     }
     
     //update tasks amount and finished ones 
-    let children = taskContainer.querySelectorAll(':scope > div')
+    let children = taskContainer.querySelectorAll(':scope > div'); 
+    
+    tasksAmount = children.length
     
     //node lists hasn't the method childElementCount,its just available to single DOM elements(not a set of them); 
     currentLenght = 0; 
+    
+    //odd numbers avoid the current percentage to reaches 100%Use math 
+    percentageIncrease = parseFloat((100 / tasksAmount).toFixed(2));
     
       children.forEach(div => {
         
@@ -121,26 +144,17 @@ const taskEnter = new MutationObserver(events => {
           finishedTask++;
           
         }; 
+      
+      }); 
+      
+      //if > 0? 
+      for(let x = finishedTask; x != 0; x--){
         
-        tasksAmount++; 
-      
-      })
+        currentLenght += percentageIncrease; 
     
-    //update progress variables
-    bar.style.width = 0 + '%';
-    
-    percentageIncrease = parseFloat((100 / tasksAmount).toFixed(3));
-    
-    //try change its logic to some flag apart 
-    for(let x = finishedTask;x != 0;x--){
+      }
       
-      //this loop never gets fired when the first task wasn't created being marked
-      
-      currentLenght += percentageIncrease; 
-      
-      bar.style.width = currentLenght + '%';
-      
-    }; 
+      bar.style.width = currentLenght + '%'; 
     
   });
   
@@ -251,3 +265,11 @@ taskInput.addEventListener('input', () => {
   };
   
 });
+
+const shareBtn = document.querySelector('.shareBtn')
+
+import {shareAchievement} from '/script/shareoptions.js'; 
+
+shareBtn.addEventListener('click', shareAchievement); 
+
+
