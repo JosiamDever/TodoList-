@@ -5,6 +5,8 @@ const shareData = {
 };
 
 export async function shareAchievement() {
+  
+  //checks if the browser supporta the OS API to share content 
   if (navigator.share) {
     
     try {
